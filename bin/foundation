@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require "foundation/cli"
+FoundationCLI.start(ARGV)
