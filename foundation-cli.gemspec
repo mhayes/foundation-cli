@@ -5,7 +5,7 @@ require 'foundation/cli/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "foundation-cli"
-  spec.version       = Foundation::Cli::VERSION
+  spec.version       = Foundation::CLI::VERSION
   spec.authors       = ["Mark Hayes"]
   spec.email         = ["mark@zurb.com"]
   spec.description   = %q{A CLI for working with Foundation}
