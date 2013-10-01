@@ -1,5 +1,6 @@
 require "thor"
 require "zurb-foundation"
+require "bundler"
 
 module Foundation
   module CLI
@@ -61,8 +62,8 @@ gem "zurb-foundation", "#{options[:version]}"
       desc "update", "update an existing project"
       option :version, type: :string, default: Foundation::VERSION
       def update
-        directory("js/foundation", "js")
-        remove_file("js/index.js")
+        directory("js/foundation", "javascripts/foundation")
+        remove_file("javascripts/foundation/index.js")
         # copy_file("templates/index.html", "index.html")
       end
 
@@ -74,7 +75,6 @@ gem "zurb-foundation", "#{options[:version]}"
         Process.wait(pid)
         exit $?.exitstatus
       end
-
     end
   end
 end

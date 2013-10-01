@@ -1,24 +1,14 @@
 # Foundation::Cli
 
-TODO: Write a gem description
+A CLI for creating and updating Foundation projects.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'foundation-cli'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install foundation-cli
-
-## Usage
-
-TODO: Write usage instructions here
+```bash
+git clone git@github.com:mhayes/foundation-cli.git
+bundle install
+bundle exec rake install
+```
 
 ## Contributing
 
