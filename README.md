@@ -10,6 +10,27 @@ bundle install
 bundle exec rake install
 ```
 
+## Usage
+
+### Create a new project
+
+```bash
+foundation new my_awesome_project --version 4.3.2
+```
+
+### Update a project
+```
+cd ~/Sites/my_awesome_app
+foundation update --version 4.3.2
+```
+
+### Compile assets
+
+```bash
+cd ~/Sites/my_awesome_app
+foundation watch
+```
+
 ## Contributing
 
 1. Fork it
