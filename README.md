@@ -1,5 +1,7 @@
 # Foundation::Cli
 
+**NOTE:** This is considered alpha, things may change without notice.
+
 A CLI for creating and updating Foundation projects.
 
 ## Installation
