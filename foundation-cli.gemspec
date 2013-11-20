@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'foundation/version'
+require 'foundation/cli/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "foundation"
+  spec.name          = "foundation-cli"
   spec.version       = Foundation::CLI::VERSION
   spec.authors       = ["Mark Hayes"]
   spec.email         = ["mark@zurb.com"]

@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require "foundation"
-Foundation::Generator.start(ARGV)
+require "foundation/cli"
+Foundation::CLI::Generator.start(ARGV)
