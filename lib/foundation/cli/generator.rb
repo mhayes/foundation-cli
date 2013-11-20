@@ -29,27 +29,22 @@ module Foundation
       def new(name)
         # RUBY_VERSION == "2.0.0"
         unless which("node") || which("npm")
-          say "Please install NodeJS. Aborting."
+          say "Please install NodeJS. (psst, go here: http://nodejs.org) Aborting."
           exit 1
         end
 
         unless which("bower")
-          say "Please install bower. Aborting."
+          say "Please install bower. (psst, run: sudo npm install -g bower) Aborting."
           exit 1
-        end
-
-        unless which("grunt")
-          say "Please install grunt-cli. Aborting."
-          exit 1
-        end
-
-        unless which("git")
-          say "Please install git. Aborting."
-          exit 1
-        end
+        end      
 
 
         if options[:libsass]
+          unless which("grunt")
+            say "Please install grunt-cli. (psst, run: sudo npm install -g grunt-cli) Aborting."
+            exit 1
+          end
+
           repo = "git@github.com:zurb/foundation-libsass-template.git"
         else
           unless which("compass")

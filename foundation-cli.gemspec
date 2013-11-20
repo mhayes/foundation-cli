@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'foundation/cli/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "foundation-cli"
+  spec.name          = "foundation"
   spec.version       = Foundation::CLI::VERSION
   spec.authors       = ["Mark Hayes"]
   spec.email         = ["mark@zurb.com"]
