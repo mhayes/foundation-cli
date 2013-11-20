@@ -1,3 +1,3 @@
 source "https://rubygems.org"
 
-gem "foundation-cli", path: "../."
+gem "foundation", path: "../."
