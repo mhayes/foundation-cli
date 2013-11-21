@@ -1,13 +1,9 @@
 require "thor"
-require "zurb-foundation"
-require "bundler"
 
 module Foundation
   module CLI
     class Generator < Thor
       include Thor::Actions
-      # source_root File.expand_path(File.join(File.dirname(__FILE__), "..", ".."))
-      source_root Foundation.root
 
       no_commands do
         def which(cmd)
@@ -28,7 +24,8 @@ module Foundation
       end
 
       desc "new", "create new project"
-      option :version, type: :string, default: Foundation::VERSION
+      option :libsass, type: :boolean, default: false
+      option :version, type: :string
       def new(name)
         # RUBY_VERSION == "2.0.0"
         unless which("compass")
@@ -36,44 +33,57 @@ module Foundation
           run("rbenv rehash", capture: true, verbose: false) if which("rbenv")
         end
 
-        empty_directory(name)
-        inside(name) do
-          if File.exists?("Gemfile")
-            gsub_file("Gemfile", /gem ['"]zurb-foundation['"].*/, "gem \"zurb-foundation\", \"~> #{options[:version]}\"")
-          else
-            create_file("Gemfile") do
-              s=<<-EOS
-source "https://rubygems.org"
-gem "compass"
-gem "zurb-foundation", "#{options[:version]}"
-              EOS
-            end
+        unless which("node") || which("npm")
+          say "Please install NodeJS. (psst, go here: http://nodejs.org) Aborting."
+          exit 1
+
+        end
+
+        unless which("bower")
+          say "Please install bower. (psst, run: sudo npm install -g bower) Aborting."
+          exit 1
+        end      
+
+
+        if options[:libsass]
+          unless which("grunt")
+            say "Please install grunt-cli. (psst, run: sudo npm install -g grunt-cli) Aborting."
+            exit 1
           end
 
-          Bundler.with_clean_env do
-            run "bundle install", :capture => true, :verbose => false
-            run "bundle exec compass create . -r zurb-foundation --using foundation", :capture => true, :verbose => false
+          repo = "git@github.com:zurb/foundation-libsass-template.git"
+        else
+          unless which("compass")
+            run("gem install compass", capture: true, verbose: false)
+            run("rbenv rehash", capture: true, verbose: false) if which("rbenv")
+          end
+          repo = "git@github.com:zurb/foundation-compass-template.git"
+        end
+
+        say "Creating ./#{name}"
+        empty_directory(name)
+        run "git clone #{repo} #{name}", capture: true, verbose: false
+        inside(name) do
+          say "Installing dependencies with bower..."
+          run "bower install", capture: true, verbose: false
+          run "git remote rm origin", capture: true, verbose: false
+          if options[:libsass]
+            run "npm install"
+            run "grunt build"
           end
         end
 
-        say "Foundation project has been created in ./#{name}"
+        say "./#{name} was created"
       end
 
       desc "update", "update an existing project"
-      option :version, type: :string, default: Foundation::VERSION
+      option :version, type: :string
       def update
-        directory("js/foundation", "javascripts/foundation")
-        remove_file("javascripts/foundation/index.js")
-        # copy_file("templates/index.html", "index.html")
-      end
-
-      desc "watch", "compile assets"
-      def watch
-        pid = fork do
-          run "bundle exec compass watch"
+        unless which("bower")
+          "Please install bower. Aborting."
+          exit 1
         end
-        Process.wait(pid)
-        exit $?.exitstatus
+        run "bower update"
       end
     end
   end
