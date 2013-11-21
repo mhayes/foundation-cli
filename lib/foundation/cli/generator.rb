@@ -50,14 +50,13 @@ module Foundation
             say "Please install grunt-cli. (psst, run: sudo npm install -g grunt-cli) Aborting."
             exit 1
           end
-
-          repo = "git@github.com:zurb/foundation-libsass-template.git"
+          repo = "https://github.com/zurb/foundation-libsass-template.git"
         else
           unless which("compass")
             run("gem install compass", capture: true, verbose: false)
             run("rbenv rehash", capture: true, verbose: false) if which("rbenv")
           end
-          repo = "git@github.com:zurb/foundation-compass-template.git"
+          repo = "https://github.com/zurb/foundation-compass-template.git"
         end
 
         say "Creating ./#{name}"
