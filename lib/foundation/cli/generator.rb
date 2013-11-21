@@ -31,8 +31,8 @@ module Foundation
       option :version, type: :string, default: Foundation::VERSION
       def new(name)
         # RUBY_VERSION == "2.0.0"
-        unless which("bundle")
-          run("gem install bundler", capture: true, verbose: false)
+        unless which("compass")
+          run("gem install compass", capture: true, verbose: false)
           run("rbenv rehash", capture: true, verbose: false) if which("rbenv")
         end
 
