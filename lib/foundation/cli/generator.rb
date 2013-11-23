@@ -65,6 +65,7 @@ module Foundation
         inside(name) do
           say "Installing dependencies with bower..."
           run "bower install", capture: true, verbose: false
+          create_file "scss/_settings.scss", File.read("#{destination_root}/bower_components/foundation/scss/foundation/_settings.scss")
           run "git remote rm origin", capture: true, verbose: false
           if options[:libsass]
             run "npm install"
