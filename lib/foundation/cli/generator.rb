@@ -11,7 +11,7 @@ module Foundation
           exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
           ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
             exts.each { |ext|
-              exe = File.join(path, "#{cmd}#{ext}")
+              exe = File.join(File.expand_path(path), "#{cmd}#{ext}")
               return exe if File.executable? exe
             }
           end
